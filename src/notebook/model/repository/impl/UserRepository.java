@@ -1,9 +1,9 @@
-package notebook.repository.impl;
+package notebook.model.repository.impl;
 
-import notebook.dao.impl.FileOperation;
-import notebook.mapper.impl.UserMapper;
+import notebook.model.dao.impl.FileOperation;
+import notebook.util.mapper.impl.UserMapper;
 import notebook.model.User;
-import notebook.repository.GBRepository;
+import notebook.model.repository.GBRepository;
 
 import java.util.ArrayList;
 import java.util.List;

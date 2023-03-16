@@ -1,12 +1,10 @@
 package notebook.controller;
 
 import notebook.model.User;
-import notebook.repository.GBRepository;
+import notebook.model.repository.GBRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class UserController {
     private final GBRepository<User, Long> repository;
