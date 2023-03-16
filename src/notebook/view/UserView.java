@@ -4,6 +4,7 @@ import notebook.controller.UserController;
 import notebook.model.User;
 import notebook.util.Commands;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserView {
@@ -36,6 +37,18 @@ public class UserView {
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
+                    break;
+                case LIST:
+                    List<User> allUsers = userController.getAllUsers();
+                    for (User user : allUsers) System.out.println(user);
+                    break;
+                case UPDATE:
+                    long userId = Long.parseLong(prompt("Enter user id: "));
+                    String updateFirstName = prompt("Имя: ");
+                    String updateLastName = prompt("Фамилия: ");
+                    String updatePhone = prompt("Номер телефона: ");
+                    User user = new User(updateFirstName, updateLastName, updatePhone);
+                    userController.userUpdate(userId, user);
                     break;
             }
         }
