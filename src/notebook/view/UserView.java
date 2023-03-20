@@ -23,15 +23,13 @@ public class UserView {
             if (com == Commands.EXIT) return;
             switch (com) {
                 case CREATE:
-                    String firstName = prompt("Имя: ");
-                    String lastName = prompt("Фамилия: ");
-                    String phone = prompt("Номер телефона: ");
-                    userController.saveUser(new User(firstName, lastName, phone));
+                    User u = createUser();
+                    userController.saveUser(u);
                     break;
                 case READ:
                     String id = prompt("Идентификатор пользователя: ");
                     try {
-                        User user = userController.readUser(Long.parseLong(id));
+                        User user = userController.findUser(Long.parseLong(id));
                         System.out.println(user);
                         System.out.println();
                     } catch (Exception e) {
@@ -40,15 +38,19 @@ public class UserView {
                     break;
                 case LIST:
                     List<User> allUsers = userController.getAllUsers();
-                    for (User user : allUsers) System.out.println(user);
+                    System.out.println();
+                    for (User user : allUsers) {
+                        System.out.println(user);
+                        System.out.println("----------------");
+                    }
                     break;
                 case UPDATE:
-                    long userId = Long.parseLong(prompt("Enter user id: "));
-                    String updateFirstName = prompt("Имя: ");
-                    String updateLastName = prompt("Фамилия: ");
-                    String updatePhone = prompt("Номер телефона: ");
-                    User user = new User(updateFirstName, updateLastName, updatePhone);
-                    userController.userUpdate(userId, user);
+                    String userId = prompt("Enter user id: ");
+                    userController.updateUser(userId, createUser());
+                    break;
+                case DELETE:
+                    userId = prompt("Enter user id: ");
+                    userController.deleteUser(userId);
                     break;
             }
         }
@@ -58,5 +60,12 @@ public class UserView {
         Scanner in = new Scanner(System.in);
         System.out.print(message);
         return in.nextLine();
+    }
+
+    private User createUser() {
+        String firstName = prompt("Имя: ");
+        String lastName = prompt("Фамилия: ");
+        String phone = prompt("Номер телефона: ");
+        return new User(firstName, lastName, phone);
     }
 }
